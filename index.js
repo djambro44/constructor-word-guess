@@ -1,15 +1,19 @@
 const Word = require("./word.js");
+
 const inquirer = require("inquirer");
 
 // letters entry
-var letterArray = "abcdefghijklmnopqrstuvwxyz";
+var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 // List of words to choose from
 var ReggaeBands = ["sublime", "dirty heads", "slighty stoopid", "pepper", "soja", "sticky fingers", "the movement", "katastro", "rebelution", "fortunate youth", "collie buddz", "iration"];
 
 // Pick Random index from ReggaeBands array
-var randomIndex = Math.floor(Math.random() * ReggaeBands.length);
-var randomWord = ReggaeBands[randomIndex];
+var randomWord = ReggaeBands[Math.floor(Math.random() * ReggaeBands.length)];
+console.log(ReggaeBands, randomWord);
+
+
+
 
 // Pass random word through Word constructor
 computerWord = new Word(randomWord);
@@ -23,13 +27,16 @@ var correctLetters = [];
 // Guesses left
 var guessesLeft = 10;
 
+
+
 function knowledge() {
 
     // Generates new word for Word constructor if true
-    if (requireNewWord) {
+    if (requireNewWord === true) {
         // Selects random ReggaeBands array
         var randomIndex = Math.floor(Math.random() * ReggaeBands.length);
         var randomWord = ReggaeBands[randomIndex];
+
 
         // Passes random word through the Word constructor
         computerWord = new Word(randomWord);
@@ -41,7 +48,8 @@ function knowledge() {
 
     // TestS if a letter guessed is correct
     var wordComplete = [];
-    computerWord.objArray.forEach(completeCheck);
+    console.log(randomWord);
+    computerWord.letters.forEach(completeCheck);
 
     // letters remaining to be guessed
     if (wordComplete.includes(false)) {
@@ -74,7 +82,7 @@ function knowledge() {
                         computerWord.userGuess(input.userinput);
 
                         // Checks if guess is correct
-                        computerWord.objArray.forEach(wordCheck);
+                        computerWord.now.forEach(wordCheck);
                         if (wordCheckArray.join('') === wordComplete.join('')) {
                             console.log("\nIncorrect\n");
 
