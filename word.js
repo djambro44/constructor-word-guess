@@ -17,7 +17,7 @@ function Word(answer) {
     
     this.userGuess = function (input) {
         var foundLetter = false;
-        console.log(letters, input);
+        console.log(this.letters, input);
         this.letters.forEach(function(Letter){
             if (Letter.guess === input) {
                 foundLetter = true;

@@ -82,20 +82,29 @@ function knowledge() {
                         computerWord.userGuess(input.userinput);
 
                         // Checks if guess is correct
-                        computerWord.now.forEach(wordCheck);
+                        computerWord.letters.forEach(wordCheck);
+                        console.log(wordCheckArray);
+                        console.log(wordComplete);
                         if (wordCheckArray.join('') === wordComplete.join('')) {
+                            console.log("\nCorrect! You completed the whole word!\n");
+                            
+                            correctLetters.push(input.userinput);
+                        } 
+                        else if(wordComplete.join("").includes(input.userinput))  {
+                            console.log("\nCorrect!\n");
+                            
+                            correctLetters.push(input.userinput);
+                        }
+                        
+                        else {
                             console.log("\nIncorrect\n");
 
                             incorrectLetters.push(input.userinput);
                             guessesLeft--;
-                        } else {
-                            console.log("\nCorrect!\n");
-
-                            correctLetters.push(input.userinput);
-                        }
+                        } 
 
 
-                        computerWord.log();
+                        // computerWord.log();
 
                         // Print guesses left
                         console.log("Guesses Left: " + guessesLeft + "\n");
