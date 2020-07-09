@@ -52,7 +52,7 @@ function knowledge() {
     computerWord.letters.forEach(completeCheck);
 
     // letters remaining to be guessed
-    if (wordComplete.includes(false)) {
+    if (wordComplete.filter(letter => letter.guessed === false).length > 0) {
         inquirer
             .prompt([
                 {
@@ -85,12 +85,14 @@ function knowledge() {
                         computerWord.letters.forEach(wordCheck);
                         console.log(wordCheckArray);
                         console.log(wordComplete);
-                        if (wordCheckArray.join('') === wordComplete.join('')) {
+                        if (wordCheckArray.join('') === wordComplete.map(letter => {if (letter.guessed === true){
+                            return letter.letter; 
+                        } }).join("")) {
                             console.log("\nCorrect! You completed the whole word!\n");
                             
                             correctLetters.push(input.userinput);
                         } 
-                        else if(wordComplete.join("").includes(input.userinput))  {
+                        else if(wordComplete.map(letter => letter.letter).join("").includes(input.userinput))  {
                             console.log("\nCorrect!\n");
                             
                             correctLetters.push(input.userinput);
@@ -125,12 +127,13 @@ function knowledge() {
 
 
                         function wordCheck(key) {
-                            wordCheckArray.push(key.guessed);
+                            wordCheckArray.push(key.letter);
                         }
                     }
                 }
             })
     } else {
+ //first if block ends
         console.log("YOU WIN!\n");
 
         restartGame();
@@ -138,7 +141,7 @@ function knowledge() {
 
 
     function completeCheck(key) {
-        wordComplete.push(key.guessed);
+        wordComplete.push(key);
     }
 
 }
